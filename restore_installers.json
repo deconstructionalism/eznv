@@ -1,0 +1,14 @@
+{
+    "apm": {
+        "sh_item_command": "apm install {item}"
+    },
+    "code": {
+        "sh_item_command": "code --install-extension {item}"
+    },
+    "brew": {
+        "sh_item_command": "brew install {item}"
+    },
+    "brew_cask": {
+        "sh_item_command": "brew cask install {item}"
+    }
+}

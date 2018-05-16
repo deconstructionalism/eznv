@@ -1,4 +1,4 @@
-# EZNV 
+# EZNV
 
 EZ backup and restore of your computing NVironment
 
@@ -11,7 +11,7 @@ private gist automatically, and restore installation easily as well.
 
 - MacOS 10 (only tested on 10.13.4)
 - Python 3.6
-- `gist` command line gister (https://github.com/defunkt/gist)
+- [`gist` command line gister](https://github.com/defunkt/gist)
 - binaries listed in **GENERATE INSTALL LIST FILES** section of `eznv_backup.sh`
 - config files listed in **CONFIG FILES TO SAVE** section of `eznv_backup.sh`
 
@@ -28,10 +28,9 @@ private gist automatically, and restore installation easily as well.
     - You can add installer configurations for restoring from `*.install` files saved by `eznv_backup.sh`. The `restore_installers.json` file in root dir is set up in the following format:
     ```json
     {
-        [program_name]: {
-            "sh_item_command": [shell_command]
-        },
-        ...
+        "[program_name]": {
+            "sh_item_command": "[shell_command]"
+        }
     }
     ```
     - program_name =  `*` in `*.install`
@@ -41,15 +40,21 @@ private gist automatically, and restore installation easily as well.
     {
         "brew": {
             "sh_item_command": "brew install {item}"
-        },
-        ...
+        }
     }
     ```
-## Useage
+
+## Usage
 
 ### Backup
+
 - run `sh eznv_backup.sh`
 - once backup is complete, your backup gist will be opened in a new browser window
 
 ### Restore
+
 - run `python3 eznv_restore.sh [gist_id]`
+
+## License
+
+GNU GPLv3

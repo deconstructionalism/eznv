@@ -1,5 +1,5 @@
 - replace command line gister with http requests
-- replace usage of requests package with http.clint
+- replace usage of requests package with http.client
 - convert eznv_backup to python
 - move backup config to json
 - move restore commands and backup commands to modules folder, one file per program

@@ -47,13 +47,15 @@ EOF
 
 # CONFIG FILES TO SAVE
 config_files=("~/._system.backup" \
-              "~/com.googlecode.iterm2.plist" \
-              "~/.zshrc" \
+              "~/.ga_profile" \
+              "~/.gitconfig" \
+              "~/.gitignore" \
+              "~/.tmux.conf" \
               "~/.bashrc" \
+              "~/.profile" \
               "~/.bash_profile" \
               "~/.vimrc" \
-              "~/.bashrc" \
-              "~/.config/nvim/init.vim")
+              "~/.bashrc")
 
 # GET PATH OF THIS SCRIPT
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
@@ -65,15 +67,47 @@ mkdir $tmp_dir
 cd $tmp_dir
 
 # GENERATE INSTALL LIST FILES
+## declare array variable
+declare -a programs=("apm" "brew" "system_profiler" "tmux" "vim")
+
+## loop through array
+for i in "${programs[@]}"
+do
+  if ! [ -x "$(command -v "$i")" ]; then
+    echo "Error: $i is not installed. Edit this file to remove program install file" >&2
+    exit 1
+  fi
+done
+
+#if ! [ -x "$(command -v git)" ]; then
+#  echo 'Error: git is not installed.' >&2
+#  exit 1
+#fi
 apm list --installed --bare > apm.install
-code --list-extensions > code.install
-brew leaves > brew.install
-brew cask list --full-name > brew_cask.install
-system_profiler SPApplicationsDataType -xml > apps.install
+while true; do
+  read -p "Do you wish to save brew programs?" yn
+  case $yn in
+    [Yy]* ) brew leaves > brew.install && brew cask list --full-name > brew_cask.install; break;;
+    [Nn]* ) echo 'skipped brew apps'; break;;
+    * ) echo 'Please answer yes or no.';;
+  esac
+done
+echo "Do you wish to save mac OSX apps?"
+select yn in "Yes" "No"; do
+  case $yn in
+    Yes ) system_profiler SPApplicationsDataType -xml > apps.install; break;;
+    No ) echo 'skipped mac osx apps'; break;;
+  esac
+done
+ls ~/.tmux/plugins/ > tmux_plugins.install
+ls ~/.vim/bundle/ > vim_plugins.install
 
 # GET SPACE-SEPARATED LIST OF INSTALL LIST FILES
 install_files=$(find  *.install | tr '\n' ' ')
 
 # MAKE PRIVATE GIST WITH ALL FILES
 # includes: config_files, install list files, this script
+
+echo "install files are $install_files"
+echo "self path is $self_path"
 gist -p -o $self_path $install_files ${config_files[@]} -d "`date` - full config backup"

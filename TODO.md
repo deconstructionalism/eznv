@@ -1,0 +1,10 @@
+- replace command line gister with http requests
+- replace usage of requests package with http.clint
+- convert eznv_backup to python
+- move backup config to json
+- move restore commands and backup commands to modules folder, one file per program
+- add restore config files option
+- convert scripts to classes and modules
+- write for python 2.7 backwards compat
+- test on different OSes
+- add CI and tests

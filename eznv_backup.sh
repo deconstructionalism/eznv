@@ -53,7 +53,8 @@ config_files=("~/._system.backup" \
               "~/.bash_profile" \
               "~/.vimrc" \
               "~/.bashrc" \
-              "~/.config/nvim/init.vim")
+              "~/.config/nvim/init.vim" \
+              "~/.ssh/config")
 
 # GET PATH OF THIS SCRIPT
 dir="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"

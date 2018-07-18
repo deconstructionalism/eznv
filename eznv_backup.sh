@@ -51,6 +51,7 @@ config_files=("~/._system.backup" \
               "~/.zshrc" \
               "~/.bashrc" \
               "~/.bash_profile" \
+              "~/.sanitize" \
               "~/.vimrc" \
               "~/.bashrc" \
               "~/.config/nvim/init.vim" \
